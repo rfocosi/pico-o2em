@@ -92,7 +92,20 @@ This compiles the project and generates `pico-o2em.uf2` in the `build` directory
 
 ---
 
-## 5. How to Use
+## 5. How to Install
+
+To load the compiled emulator onto your Raspberry Pi Pico:
+
+1. Unplug the USB cable from the Pico.
+2. Press and hold the **BOOTSEL** button on the Pico board.
+3. While holding the button, connect the Pico to your PC using a USB cable.
+4. Release the **BOOTSEL** button. The Pico will mount on your PC as a mass storage drive named **RPI-RP2**.
+5. Copy or drag-and-drop the `pico-o2em.uf2` file from the `build/` directory onto the **RPI-RP2** drive.
+6. The Pico will flash the firmware, automatically reboot, and begin executing.
+
+---
+
+## 6. How to Use
 
 ### Loading Game ROMs
 
