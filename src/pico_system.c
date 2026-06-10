@@ -5,7 +5,7 @@
 #include "hardware/clocks.h"
 #include <libretro.h>
 
-#include "system.h"
+#include "o2em_system.h"
 
 // Placeholder BIOS array of 1024 bytes
 // In a physical build, the user can replace this with the real Odyssey 2 BIOS (o2rom.bin)
@@ -163,3 +163,29 @@ void system_sync_frame(void) {
     // Odyssey 2 runs NTSC at roughly 60Hz. Delay target by 16,666 microseconds (1/60th second)
     target_time = delayed_by_us(target_time, 16666);
 }
+
+// ============================================================================
+// Newlib/Bare-metal Libretro-common VFS Linker Stubs
+// ============================================================================
+#include <vfs/vfs_implementation.h>
+
+libretro_vfs_implementation_file *retro_vfs_file_open_impl(const char *path, unsigned mode, unsigned hints) { return NULL; }
+int retro_vfs_file_close_impl(libretro_vfs_implementation_file *stream) { return -1; }
+int retro_vfs_file_error_impl(libretro_vfs_implementation_file *stream) { return -1; }
+int64_t retro_vfs_file_size_impl(libretro_vfs_implementation_file *stream) { return -1; }
+int64_t retro_vfs_file_truncate_impl(libretro_vfs_implementation_file *stream, int64_t length) { return -1; }
+int64_t retro_vfs_file_tell_impl(libretro_vfs_implementation_file *stream) { return -1; }
+int64_t retro_vfs_file_seek_impl(libretro_vfs_implementation_file *stream, int64_t offset, int seek_position) { return -1; }
+int64_t retro_vfs_file_read_impl(libretro_vfs_implementation_file *stream, void *s, uint64_t len) { return -1; }
+int64_t retro_vfs_file_write_impl(libretro_vfs_implementation_file *stream, const void *s, uint64_t len) { return -1; }
+int retro_vfs_file_flush_impl(libretro_vfs_implementation_file *stream) { return -1; }
+int retro_vfs_file_remove_impl(const char *path) { return -1; }
+int retro_vfs_file_rename_impl(const char *old_path, const char *new_path) { return -1; }
+const char *retro_vfs_file_get_path_impl(libretro_vfs_implementation_file *stream) { return NULL; }
+int retro_vfs_stat_impl(const char *path, int32_t *size) { return -1; }
+int retro_vfs_mkdir_impl(const char *dir) { return -1; }
+libretro_vfs_implementation_dir *retro_vfs_opendir_impl(const char *dir, bool include_hidden) { return NULL; }
+bool retro_vfs_readdir_impl(libretro_vfs_implementation_dir *dirstream) { return false; }
+const char *retro_vfs_dirent_get_name_impl(libretro_vfs_implementation_dir *dirstream) { return NULL; }
+bool retro_vfs_dirent_is_dir_impl(libretro_vfs_implementation_dir *dirstream) { return false; }
+int retro_vfs_closedir_impl(libretro_vfs_implementation_dir *dirstream) { return -1; }

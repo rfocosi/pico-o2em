@@ -5,7 +5,7 @@
 #include "hardware/dma.h"
 #include "hardware/irq.h"
 
-#include "video.h"
+#include "o2em_video.h"
 #include "composite_video.pio.h"
 
 #define VIDEO_GPIO_BASE 20  // GPIO 20, 21, 22

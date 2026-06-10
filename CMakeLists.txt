@@ -26,9 +26,13 @@ target_include_directories(pico-o2em PRIVATE
 # Compiler Flags & Defines
 target_compile_definitions(pico-o2em PRIVATE
     STATIC_LINKING=1
-    HAVE_VOICE=0
     __LIBRETRO__
     __PICO__
+    __STDC_FORMAT_MACROS=1
+    PRId64="lld"
+    PRIu64="llu"
+    PRIx64="llx"
+    PRIX64="llX"
 )
 
 # Add Source Files
@@ -40,6 +44,8 @@ target_sources(pico-o2em PRIVATE
     src/pico_audio.c
     src/pico_input.c
     src/pico_cartridge.c
+    src/pico_vmachine.c
+    src/pico_file_stream.c
     src/composite_video.pio
 
     # Unmodified core source files
@@ -50,7 +56,6 @@ target_sources(pico-o2em PRIVATE
     ../libretro-o2em/src/score.c
     ../libretro-o2em/src/table.c
     ../libretro-o2em/src/vdc.c
-    ../libretro-o2em/src/vmachine.c
     ../libretro-o2em/src/voice.c
     ../libretro-o2em/src/vpp.c
     ../libretro-o2em/src/vpp_cset.c
@@ -71,7 +76,6 @@ target_sources(pico-o2em PRIVATE
     ../libretro-o2em/libretro-common/encodings/encoding_utf.c
     ../libretro-o2em/libretro-common/file/file_path.c
     ../libretro-o2em/libretro-common/file/file_path_io.c
-    ../libretro-o2em/libretro-common/streams/file_stream.c
     ../libretro-o2em/libretro-common/streams/file_stream_transforms.c
     ../libretro-o2em/libretro-common/string/stdstring.c
     ../libretro-o2em/libretro-common/time/rtime.c

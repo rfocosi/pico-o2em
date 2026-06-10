@@ -3,7 +3,7 @@
 #include "pico/stdlib.h"
 #include "hardware/gpio.h"
 
-#include "cartridge.h"
+#include "o2em_cartridge.h"
 
 // 74HC595 Address Shifter Pins
 #define PIN_CART_SER    14  // Serial Data Input

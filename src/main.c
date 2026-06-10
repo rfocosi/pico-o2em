@@ -1,13 +1,14 @@
 #include <stdio.h>
+#include <stdarg.h>
 #include <stdbool.h>
 #include <string.h>
 #include <libretro.h>
 
-#include "system.h"
-#include "video.h"
-#include "audio.h"
-#include "input.h"
-#include "cartridge.h"
+#include "o2em_system.h"
+#include "o2em_video.h"
+#include "o2em_audio.h"
+#include "o2em_input.h"
+#include "o2em_cartridge.h"
 
 // Log callback from retro core
 static void log_cb(enum retro_log_level level, const char *fmt, ...) {

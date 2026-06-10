@@ -5,7 +5,7 @@
 #include "hardware/i2c.h"
 #include <libretro.h>
 
-#include "input.h"
+#include "o2em_input.h"
 
 // 74HC165 Joystick Pins
 #define PIN_JOY_CLK   10

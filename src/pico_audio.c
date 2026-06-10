@@ -4,7 +4,7 @@
 #include "hardware/pwm.h"
 #include "hardware/gpio.h"
 
-#include "audio.h"
+#include "o2em_audio.h"
 
 #define AUDIO_PIN_LEFT   28  // GPIO 28
 #define AUDIO_PIN_RIGHT  27  // GPIO 27
