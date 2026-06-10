@@ -47,6 +47,10 @@ target_sources(pico-o2em PRIVATE
     src/pico_vmachine.c
     src/pico_file_stream.c
     src/composite_video.pio
+    src/pico_diskio.c
+    src/pico_msc.c
+    src/usb_descriptors.c
+    src/ff.c
 
     # Unmodified core source files
     ../libretro-o2em/src/audio.c
@@ -93,11 +97,13 @@ target_link_libraries(pico-o2em
     hardware_i2c
     hardware_gpio
     hardware_clocks
+    hardware_flash
+    tinyusb_device
 )
 
 # Enable stdout redirection over UART and USB (picotool / serial monitor)
 pico_enable_stdio_uart(pico-o2em 1)
-pico_enable_stdio_usb(pico-o2em 1)
+pico_enable_stdio_usb(pico-o2em 0)
 
 # Generate hex, bin, uf2 and map file outputs automatically
 pico_add_extra_outputs(pico-o2em)
