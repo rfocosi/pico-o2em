@@ -1,0 +1,39 @@
+# Build directories
+build/
+.cmake/
+
+# CMake temporary and generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+install_manifest.txt
+compile_commands.json
+
+# Pico SDK build artifacts
+*.elf
+*.bin
+*.hex
+*.uf2
+*.map
+*.dis
+*.elf.map
+
+# Object files and libraries
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS-specific files
+.DS_Store
+Thumbs.db

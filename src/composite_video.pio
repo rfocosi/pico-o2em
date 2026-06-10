@@ -1,0 +1,41 @@
+.program composite_video
+
+; A simple PIO program to shift out 3-bit DAC values to the OUT pins.
+; With autopull enabled, it shifts out 3 bits at a time and automatically
+; refills the shift register from the FIFO.
+.wrap_target
+    out pins, 3
+.wrap
+
+% c-sdk {
+#include "hardware/clocks.h"
+
+static inline void composite_video_program_init(PIO pio, uint sm, uint offset, uint pin_base) {
+    pio_sm_config c = composite_video_program_get_default_config(offset);
+
+    // Map the OUT pins to the 3 GPIO pins starting at pin_base
+    sm_config_set_out_pins(&c, pin_base, 3);
+
+    // Configure GPIOs 20, 21, 22 for PIO function
+    for (int i = 0; i < 3; i++) {
+        pio_gpio_init(pio, pin_base + i);
+    }
+
+    // Set pin direction to output
+    pio_sm_set_consecutive_pindirs(pio, sm, pin_base, 3, true);
+
+    // Set shift direction to right (LSB first), autopull enabled, threshold = 30 bits (10 pixels of 3 bits)
+    // We can also configure 8-bit or 32-bit transfers. For simplicity, we write 8 bits containing the 3-bit value.
+    // So autopull pulls every 8 bits.
+    sm_config_set_out_shift(&c, true, true, 8);
+
+    // Set clock divider: 250 MHz system clock / target pixel clock (e.g. 6.16 MHz for composite video timing)
+    // Divider = 250 / 6.16 = 40.58
+    float div = (float)clock_get_hz(clk_sys) / 6160000.0f;
+    sm_config_set_clkdiv(&c, div);
+
+    // Load configuration and start the state machine
+    pio_sm_init(pio, sm, offset, &c);
+    pio_sm_set_enabled(pio, sm, true);
+}
+%}
