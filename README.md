@@ -121,4 +121,25 @@ To load the compiled emulator onto your Raspberry Pi Pico:
    - To copy games to the internal drive, connect the Pico's USB port to a PC while **holding the Player 1 Joystick Action button** (button B) at boot, or boot the board with **no cartridge and no ROM files** present.
    - The Pico will mount as a standard drive named **"Odyssey 2 Flash Drive"**. 
    - Drag and drop your game files (e.g. `kansas.bin`) onto the drive. Unplug and reset the console to play.
+   - **Odyssey 2 BIOS (`o2rom.bin` or `c52.bin`)**: You only need **one** BIOS file depending on the console region (typically `o2rom.bin` for NTSC/US Magnavox Odyssey 2, or `c52.bin` for PAL/Europe Philips Videopac G7000). Place the file into the root directory of this drive. If missing, the system will use an embedded 1KB dummy placeholder BIOS.
    - If the virtual partition is empty/blank on first boot, the system formats it automatically and creates a `README.TXT` guide file.
+
+---
+
+## 7. Testing on the Host Machine
+
+While the bare-metal port target is specific to the RP2040 hardware (relying on PIO, PWM, DMA, and GPIO lines), you can build and run the emulator core natively on a Linux PC to verify ROMs and emulation behavior:
+
+1. **Compile Natively**:
+   Navigate to the core directory and run `make`:
+   ```bash
+   cd libretro-o2em
+   make
+   ```
+   This generates the shared library core `o2em_libretro.so` in the `libretro-o2em` folder.
+
+2. **Run via RetroArch**:
+   - Install RetroArch on your Linux machine (e.g. `sudo apt install retroarch`).
+   - Open RetroArch and select **Load Core** -> **Install or Restore a Core**, then select `o2em_libretro.so`.
+   - Place your Odyssey 2 BIOS file (`o2rom.bin`) inside your RetroArch system directory.
+   - Select **Load Content** and select your game ROM to play.
